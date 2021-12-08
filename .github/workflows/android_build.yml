@@ -1,0 +1,24 @@
+# the code below is used to give a name to our github workflow
+name: Flutter Android Build
+# the code below is used to describe the action on triggering which the workflow should work
+on: pull_request   #  here we are describing that our workflow show work on pull requests
+# the code below is used to define the tasks that should be run when we create a pull request to the main
+# branch
+jobs:
+  Build:
+    # the code below is used to define the runtime enviournment for our task
+    runs-on: ubuntu-latest    # here we are defining that the build should run on the latest ubuntu version
+    # the code below is used to define the steps for running the build
+    steps:
+      - uses: actions/checkout@v1
+      # the code below is used to provide a custom name to our task
+      - name: setup enviournment
+        uses: actions/setup-flutter@v1
+        with: 
+          Flutter-version: 2.5.0
+
+      - name: Run 
+        run: flutter run
+
+      - name: Build Project
+        run: flutter build apk --split-per-abi
